@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getJobs, deleteJob } from "../services/api"; // Import API calls
+import { getJobs, deleteJob } from "../services/api"; 
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -36,7 +36,7 @@ const JobList = () => {
   const handleDelete = async (id) => {
     try {
       await deleteJob(id);
-      setJobs(jobs.filter((job) => job._id !== id)); // Remove job from the list
+      setJobs(jobs.filter((job) => job._id !== id)); 
     } catch (error) {
       setErrorMessage(error.response?.data?.message || "Failed to delete job");
     }

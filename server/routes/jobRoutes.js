@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/', protect, createJob);
 router.get('/', protect, getJobs);
-router.get('/:jobId', protect, getJobById);  // This line is for fetching a job by ID
+router.get("/:jobId", protect, getJobById);  
 
 router.put('/:jobId', protect, editJob);
 router.delete('/:jobId', protect, deleteJob);

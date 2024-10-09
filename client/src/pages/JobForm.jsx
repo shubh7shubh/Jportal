@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getJob, createJob, editJob } from "../services/api"; // Import API functions
-import TextField from "@mui/material/TextField";  // MUI TextField for inputs
-import Button from "@mui/material/Button";  // MUI Button
-import Typography from "@mui/material/Typography";  // MUI Typography for text
+import { getJob, createJob, editJob } from "../services/api";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 const JobForm = ({ isEdit }) => {
-  const { id } = useParams(); // Get job ID from URL for editing
+  const { id } = useParams();
   const [job, setJob] = useState({
     title: "",
     description: "",
@@ -14,16 +14,15 @@ const JobForm = ({ isEdit }) => {
     location: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate(); // To navigate after form submission
+  const navigate = useNavigate();
 
-  // Fetch job details if it's edit mode
   useEffect(() => {
     if (isEdit && id) {
       async function fetchJob() {
         try {
           const response = await getJob(id);
-          console.log(response); // Fetch job details by ID
-          setJob(response); // Set job details to state
+          console.log(response);
+          setJob(response);
         } catch (error) {
           setErrorMessage(
             error.response?.data?.message || "Error fetching job details"
@@ -38,24 +37,31 @@ const JobForm = ({ isEdit }) => {
     e.preventDefault();
     try {
       if (isEdit) {
-        await editJob(id, job); // Edit existing job
+        await editJob(id, job);
       } else {
-        await createJob(job); // Create new job
+        await createJob(job);
       }
-      navigate("/jobs"); // Navigate to the home page or job listing page
+      navigate("/jobs");
     } catch (error) {
       setErrorMessage(error.response?.data?.message || "Error occurred");
     }
   };
 
   return (
-    <div style={{ maxWidth: "600px", margin: "auto", marginTop:"40px" }}>
+    <div style={{ maxWidth: "600px", margin: "auto", marginTop: "40px" }}>
       {errorMessage && (
-        <Typography variant="body1" color="error" style={{ marginBottom: "1rem" }}>
+        <Typography
+          variant="body1"
+          color="error"
+          style={{ marginBottom: "1rem" }}
+        >
           {errorMessage}
         </Typography>
       )}
-      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+      >
         <TextField
           label="Job Title"
           variant="outlined"
@@ -89,12 +95,7 @@ const JobForm = ({ isEdit }) => {
           onChange={(e) => setJob({ ...job, description: e.target.value })}
           fullWidth
         />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          fullWidth
-        >
+        <Button type="submit" variant="contained" color="primary" fullWidth>
           {isEdit ? "Edit Job" : "Create Job"}
         </Button>
       </form>

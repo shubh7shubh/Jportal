@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <div>
       <button
-        className="float-end m-4 bg-red-400 px-5 py-3 rounded-md"
+        className="float-end m-4 bg-red-400 px-4 py-2 rounded-md"
         onClick={handleLogout}
       >
         Logout

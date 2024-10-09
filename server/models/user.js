@@ -20,15 +20,15 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Encrypt password before saving user
-UserSchema.pre('save', async function (next) {
-  if (this.isModified('password')) {
+
+UserSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 10);
   }
   next();
 });
 
-// Match entered password with stored password
+
 UserSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };

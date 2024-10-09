@@ -6,9 +6,9 @@ import axios from "axios";
 export const getJob = async (id) => {
   try {
     const token = localStorage.getItem("token");
-    console.log("Token:", token); // Log token for verification
+    console.log("Token:", token); 
     const url = `${process.env.REACT_APP_API_BASE_URL}/jobs/${id}`;
-    console.log("Request URL:", url); // Log the final URL being sent
+    console.log("Request URL:", url); 
 
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${token}` },
@@ -16,8 +16,8 @@ export const getJob = async (id) => {
 
     return response.data;
   } catch (error) {
-    console.error("Error fetching job:", error.response?.data || error); // Log full error for debugging
-    throw error; // Re-throw the error
+    console.error("Error fetching job:", error.response?.data || error); 
+    throw error; 
   }
 };
 

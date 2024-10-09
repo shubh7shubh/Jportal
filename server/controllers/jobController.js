@@ -24,14 +24,14 @@ const getJobs = async (req, res) => {
 
 const getJobById = async (req, res) => {
   try {
-    const jobId = req.params.jobId; // Extract jobId from request params
-    const job = await Job.findById(jobId); // Find the job in the database
+    const jobId = req.params.jobId;
+    const job = await Job.findById(jobId);
 
     if (!job) {
-      return res.status(404).json({ message: 'Job not found' }); // If no job is found, return 404
+      return res.status(404).json({ message: "Job not found" });
     }
 
-    return res.status(200).json(job);  // Return the job as a response
+    return res.status(200).json(job); 
   } catch (error) {
     return res.status(500).json({ message: 'Server error', error });
   }
